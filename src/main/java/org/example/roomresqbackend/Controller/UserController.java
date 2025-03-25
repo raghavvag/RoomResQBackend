@@ -15,7 +15,7 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("/completeprofile")
+    @PostMapping("user/completeprofile")
     public ResponseEntity<?> completeProfile(@RequestBody User user) {
         if(user.getFirebaseUid() == null || user.getFirebaseUid().isEmpty()) {
             return ResponseEntity.badRequest().body("Firebase UID is required");
