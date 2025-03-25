@@ -27,6 +27,7 @@ public class User {
     private String hostelType;
     private String block;
     private String roomNo;
+    private String photoUrl;
 
 
 }

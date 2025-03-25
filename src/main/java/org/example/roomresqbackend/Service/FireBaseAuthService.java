@@ -32,6 +32,10 @@ public class FireBaseAuthService {
         String email = decodedToken.getEmail();
         String name = decodedToken.getName();
 
+        // Get the UserRecord to access profile photo
+        UserRecord userRecord = getUserDetails(uid);
+        String photoUrl = userRecord.getPhotoUrl();
+
         // Check if the user exists
         User user = userRepository.findByFirebaseUid(uid)
                 .orElse(new User());
@@ -40,6 +44,7 @@ public class FireBaseAuthService {
         user.setFirebaseUid(uid);
         user.setEmail(email);
         user.setName(name);
+        user.setPhotoUrl(photoUrl); // Set the photo URL
 
         // Save the user
         return userRepository.save(user);
