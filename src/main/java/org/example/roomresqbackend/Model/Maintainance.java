@@ -18,7 +18,7 @@ public class Maintainance {
     private Long ticketid;
     private String issue;
     private String description;
-    private String Urgeny;
+    private String urgency;
     private String status;
     private LocalDateTime date;
     private LocalDateTime time;
