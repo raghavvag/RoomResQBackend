@@ -26,10 +26,16 @@ public class AuthController {
                 return ResponseEntity.badRequest().body("ID token is required");
             }
 
-            User user = firebaseAuthService.authenticateWithGoogle(idToken);
+            Object authenticatedUser = firebaseAuthService.authenticateWithGoogle(idToken);
 
             Map<String, Object> response = new HashMap<>();
-            response.put("user", user);
+            if (authenticatedUser instanceof User) {
+                response.put("user", authenticatedUser);
+                response.put("role", "student");
+            } else {
+                response.put("user", authenticatedUser);
+                response.put("role", "admin");
+            }
             response.put("message", "Google sign-in successful");
 
             return ResponseEntity.ok(response);
