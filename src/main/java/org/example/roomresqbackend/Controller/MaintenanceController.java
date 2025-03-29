@@ -30,14 +30,16 @@ public class MaintenanceController {
         maintenanceService.save(maintenance, user);
         return ResponseEntity.ok(maintenance);
     }
-//for single maintenance
+
+    // for single maintenance
     @GetMapping("/maintenance/{id}")
     public ResponseEntity<?> getMaintenance(@PathVariable String id) {
         return maintenanceService.getMaintenanceById(id)
                 .map(maintenance -> ResponseEntity.ok(maintenance))
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Maintenance request not found"));
     }
-//for all maintenances
+
+    // for all maintenances
     @GetMapping("/maintenance/user")
     public ResponseEntity<?> getUserMaintenances(@RequestParam String email) {
         User user = userRepository.findByEmail(email)
@@ -45,5 +47,12 @@ public class MaintenanceController {
 
         List<Maintainance> maintenances = maintenanceService.getMaintenancesByUser(user);
         return ResponseEntity.ok(maintenances);
+    }
+
+    @PostMapping("maintenance/status")
+    public ResponseEntity<?> maintenanceStatus(@RequestParam String id, @RequestParam String status) {
+         return maintenanceService.update(id, status)
+                .map(maintenance->ResponseEntity.ok(maintenance))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Maintenance request not found"));
     }
 }

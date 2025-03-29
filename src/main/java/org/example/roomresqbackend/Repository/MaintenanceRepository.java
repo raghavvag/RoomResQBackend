@@ -6,10 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface MaintenanceRepository extends JpaRepository<Maintainance,Long> {
+public interface MaintenanceRepository extends JpaRepository<Maintainance, Long> {
     List<Maintainance> findByUser(User user);
-
-
     List<Maintainance> findByBlock(String block);
-
 }

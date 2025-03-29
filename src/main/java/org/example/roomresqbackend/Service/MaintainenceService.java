@@ -38,4 +38,17 @@ public class MaintainenceService {
     public List<Maintainance> getMaintenancesByUser(User user) {
         return maintenanceRepository.findByUser(user);
     }
+
+    public Optional<Object> update(String id, String status) {
+        Optional<Maintainance> optionalMaintainance = maintenanceRepository.findById(Long.parseLong(id));
+        if (optionalMaintainance.isPresent()) {
+            Maintainance m = optionalMaintainance.get();
+            m.setStatus(status);
+            return Optional.of(maintenanceRepository.save(m));
+        } else {
+            return Optional.empty();
+        }
+    }
+
+
 }
