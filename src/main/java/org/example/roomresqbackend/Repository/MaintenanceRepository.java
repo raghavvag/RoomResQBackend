@@ -11,4 +11,5 @@ public interface MaintenanceRepository extends JpaRepository<Maintainance,Long> 
 
 
     List<Maintainance> findByBlock(String block);
+
 }

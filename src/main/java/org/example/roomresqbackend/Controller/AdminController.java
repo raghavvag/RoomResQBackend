@@ -42,4 +42,5 @@ private AdminRepository adminRepository;
                 .map(admin -> ResponseEntity.ok(admin))
                 .orElse(ResponseEntity.notFound().build());
     }
+
 }
