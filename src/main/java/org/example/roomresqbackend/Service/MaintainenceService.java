@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import org.example.roomresqbackend.Model.Maintainance;
 import org.example.roomresqbackend.Model.User;
 import org.example.roomresqbackend.Repository.MaintenanceRepository;
+import org.example.roomresqbackend.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +15,15 @@ import java.util.Optional;
 public class MaintainenceService {
     @Autowired
     private MaintenanceRepository maintenanceRepository;
+    @Autowired
+    private UserRepository userRepository;
+
     public void save(Maintainance maintenance, User user) {
+
+        maintenance.setBlock(user.getBlock());
         maintenance.setUser(user);
         maintenance.setStatus("pending");
         maintenanceRepository.save(maintenance);
-
     }
 
     public Optional<Object> getMaintenanceById(String id) {
@@ -27,8 +32,8 @@ public class MaintainenceService {
                     // Convert to a suitable response object if needed
                     return maintenance;
                 });
-
     }
+
     @Transactional
     public List<Maintainance> getMaintenancesByUser(User user) {
         return maintenanceRepository.findByUser(user);

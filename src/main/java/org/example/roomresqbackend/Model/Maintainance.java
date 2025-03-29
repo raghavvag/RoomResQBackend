@@ -28,7 +28,7 @@ public class Maintainance {
     @ManyToOne
     @JoinColumn(name = "email")
     private User user;
-
+    private String block;
 
 
 }

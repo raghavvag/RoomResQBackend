@@ -8,4 +8,7 @@ import java.util.List;
 
 public interface MaintenanceRepository extends JpaRepository<Maintainance,Long> {
     List<Maintainance> findByUser(User user);
+
+
+    List<Maintainance> findByBlock(String block);
 }
